@@ -22,23 +22,6 @@ def f(n,i):
         memo[n][i] = f(n-1,i-1) + f(n-1,i+1)
         return memo[n][i]
 
-
-# 귝귝코드
-# def f(n,i):
-#     if n==1:
-#         if i==0:
-#             return 0
-#         else:
-#             return 1
-#     ret = memo[n][i]
-#
-#     if ret>0:
-#         return ret
-#
-#     if i!=0: ret += f(n - 1, i - 1)
-#     if i!=9: ret += f(n - 1, i + 1)
-#     return ret
-
 # i가 변하게 해야 하니까 반복문돌려
 ans = 0
 for i in range(10):
