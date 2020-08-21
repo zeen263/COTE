@@ -12,5 +12,3 @@ for i in range(2, int(N**0.5)+1):
 
 for i in range(M, len(isprime)):
     if isprime[i]: print(i)
-
-
