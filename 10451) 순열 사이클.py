@@ -33,4 +33,5 @@ for case in range(T):
     permu = [0] + list(map(int, sys.stdin.readline().split()))
     visited = [False for x in range(size+1)]
 
+
     print(cyclecheck(size))
