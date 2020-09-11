@@ -1,11 +1,6 @@
 import sys
 from collections import deque
 
-
-# 익은 토마토는 1, 안익은 토마토는 0, 토마토가 없는 칸은 -1
-# 익은 토마토가 하나도 없거나 고립된 토마토가 있으면 -1 출력 < 어떻게 찾지?
-# 처음부터 다 익어 있으면 0일
-
 def bfs(q):
     global storage, days
     front = q[0]
