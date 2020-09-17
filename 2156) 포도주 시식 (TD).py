@@ -13,10 +13,9 @@ def f(n,i):
         choose[n][2] = choose[n-1][1] + wine[n]
         return choose[n][2]
 
-    if i == 1:  #N번 잔을 1연속으로 선택 : N-2번 잔을 0연속/1연속/2연속으로 선택 (N-1번 잔은 선택x)
-        for j in range(3):
-            choose[n-2][j] = f(n-2, j)
-        choose[n][1] = max(choose[n-2]) + wine[n]
+    if i == 1:  #N번 잔을 1연속으로 선택 : N-1번 잔을 0연속으로 선택
+        choose[n-1][0] = f(n-1, 0)
+        choose[n][1] = choose[n-1][0] + wine[n]
         return choose[n][1]
 
     if i == 0:  # N번 잔을 0연속으로 선택 : N-1번 잔을 0연속/1연속/2연속으로 선택
