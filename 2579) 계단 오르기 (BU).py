@@ -21,4 +21,4 @@ for i in range(2,N+1):
     score[i][1] = score[i-1][0] + stair[i]
     score[i][2] = score[i-1][1] + stair[i]
 
-print(max(score[-1][1], score[-1][2]))
+print(max(score[N][1], score[N][2]))
