@@ -12,8 +12,6 @@ seq = list(map(int, sys.stdin.readline().split()))
 sums = [x for x in seq]
 
 for i in range(1,N):
-    sums[i] += sums[i-1]
-    if seq[i] > sums[i]:
-        sums[i] = seq[i]
+    sums[i] = max(sums[i]+sums[i-1],seq[i])
 
 print(max(sums))
