@@ -3,11 +3,15 @@ from collections import deque
 
 def bfs(q):
     global storage, days
+
+    if not q: # 익은 토마토가 없어도 여기 들어올 수가 있다...!
+        return -1
+
     front = q[0]
     row = front[0]
     col = front[1]
     days[row][col] = 0
-    maxd = 0  # 여기 들어왔다는 건 익은 토마토가 하나 이상 있다는 것
+    maxd = 0  # 여기까지 왔다는 건 익은 토마토가 하나 이상 있다는 것
 
     while q:
         front = q[0]
@@ -52,19 +56,27 @@ for i in range(R):
         if storage[i][j] == 1 and days[i][j] == 0:
             q.append((i, j)) #익은 토마토를 큐에 넣기
 
-maxday = bfs(q)
 
+maxday = bfs(q)
 
 newtomato = [0, 0, 0]
 for line in storage:  # 토마토 저장
     for tomat in line:
         newtomato[tomat] += 1  # 토마토 상태(0,1,-1)에 따라서 newtomato에 저장
 
-if tomato[0] == 0 and tomato[1] != 0:  # 처음부터 다 익어있었다면
+if newtomato[0] == 0:  # 토마토가 무사히 익었다면
+    print(maxday)
+
+elif tomato[0] == 0 and tomato[1] != 0:  # 처음부터 다 익어있었다면
     print(0)
 
 elif tomato[1] == 0 or newtomato[0] != 0:  # 익은 토마토가 한 개도 없었거나 안익은 토마토가 남아있다면
     print(-1)
 
-elif newtomato[0] == 0:  # 토마토가 무사히 익었다면
-    print(maxday)
+
+
+"""
+2 2
+1 1 
+1 1
+"""
