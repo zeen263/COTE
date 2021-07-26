@@ -73,10 +73,3 @@ elif tomato[0] == 0 and tomato[1] != 0:  # 처음부터 다 익어있었다면
 elif tomato[1] == 0 or newtomato[0] != 0:  # 익은 토마토가 한 개도 없었거나 안익은 토마토가 남아있다면
     print(-1)
 
-
-
-"""
-2 2
-1 1 
-1 1
-"""
