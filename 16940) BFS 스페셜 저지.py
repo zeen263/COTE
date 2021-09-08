@@ -1,12 +1,14 @@
 """
 주어진 순서대로 방문해 보고 그게 bfs로 방문해야 하는 경로와 일치하는지 검사
+루트가 무조건 1인가? > 그건 맞음
 
-아니뭐가문제야
+와 근데 누가 부모고 누가 자식인지 안 줬네???
+사전에 bfs 한번 돌려서 레벨?을 먼저 구해가지고 부모자식 관계를 확실히 한 다음 내 로직 돌리기
 """
 
 
 
-import sys, collections, copy
+import sys, collections
 READ = sys.stdin.readline
 
 N = int(READ())
@@ -17,24 +19,26 @@ for i in range(N-1):
     graph[n1].append(n2)
 
 
-route = list(map(int, READ().split()))
-tmp = str(route)
-q = collections.deque()
+route = list(map(int, READ().split()))  # 입력으로 주어진 방문 순서
+if route[0] != 1:  # 이 문제에서는 루트가 무조건 1인듯
+    print(0)
+    exit()
 
+q = collections.deque()
 q.append(route.pop(0))
 res = 1
-
 while q:
     node = q[0]  # 현재 노드
     q.popleft()
 
     connected = graph[node]  # 현재 노드에 연결된 노드 전부
     LEN = len(connected)
-    visit_route = route[:LEN]  # 주어진 경로에서 방문한 순서
+    visit_route = route[:LEN]  # 주어진 순서대로 방문한 결과
 
-    if not route:
+    if not visit_route:
         break
-
+    
+    # connected랑 주어진 순서로 방문한 결과 비교
     elif set(connected) - set(visit_route):  # 공집합 아니라는 건 잘못 방문했다는 거지
         res = 0
         break
