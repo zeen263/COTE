@@ -1,17 +1,12 @@
 """
-set 이용해서 맞는지 비교해나가면?
-먼저 방문한 노드에 연결된 노드들 중에서는 순서가 어떻든 상관없으니까
-set(연결된 노드들)-set(주어진 루트에서 방문한 노드들) 했을 때 공집합이 남아야 함
+주어진 순서대로 방문해 보고 그게 bfs로 방문해야 하는 경로와 일치하는지 검사
 
-set끼리 차집합 구했을 때 이미 방문했던 노드가 남아버리면 안 되니까 단방향 그래프처럼 생각하면 되겠다
-
-중요!
-1 3 2 순으로 방문했으면 2의 자식보다 3의 자식을 더 먼저 방문해야 함
+아니뭐가문제야
 """
-# 미완성!!!
 
 
-import sys, collections
+
+import sys, collections, copy
 READ = sys.stdin.readline
 
 N = int(READ())
@@ -21,25 +16,35 @@ for i in range(N-1):
     n1, n2 = map(int, READ().split())
     graph[n1].append(n2)
 
-route = collections.deque(map(int, READ().split()))
-nodes = set(range(1, N+1))
 
+route = list(map(int, READ().split()))
+tmp = str(route)
+q = collections.deque()
+
+q.append(route.pop(0))
 res = 1
-while route:
-    front = route[0]  # 방문한 노드 계속 왼쪽에서 빼버리고 항상 0번만 보려고 큐 사용
-    route.popleft()
 
-    connected = graph[front]  # front에 연결된 노드 전부
+while q:
+    node = q[0]  # 현재 노드
+    q.popleft()
+
+    connected = graph[node]  # 현재 노드에 연결된 노드 전부
     LEN = len(connected)
+    visit_route = route[:LEN]  # 주어진 경로에서 방문한 순서
 
-    route_slice = list(route)[:LEN]
+    if not route:
+        break
 
-    if set(connected) - set(route_slice):  # 공집합 아니라는 건 잘못 방문했다는 거지
+    elif set(connected) - set(visit_route):  # 공집합 아니라는 건 잘못 방문했다는 거지
         res = 0
         break
 
+    else:
+        for i in range(LEN):
+            q.append(route.pop(0))
 
 print(res)
+
 
 """
 7
@@ -50,6 +55,7 @@ print(res)
 3 6
 3 7
 1 3 2 4 5 6 7
+res : 0
 
 10
 1 2
@@ -62,5 +68,105 @@ print(res)
 6 9
 1 6
 1 7 6 2 10 9 8 4 3 5
+res : 1
 
+10
+1 4
+1 2
+4 3
+3 9
+3 8
+2 6
+6 7
+2 5
+5 10
+1 4 2 3 6 5 9 8 7 10
+res : 1
+
+10
+1 4
+1 2
+4 3
+3 9
+3 8
+2 6
+6 7
+2 5
+5 10
+1 4 2 6 5 3 9 8 7 10
+res : 0
+
+7
+3 1
+3 2
+1 4
+1 5
+2 6
+6 7
+3 2 1 6 4 5 7
+res : 1
+
+12
+3 1
+3 2
+1 6
+1 7
+6 9
+6 10
+10 12
+2 4
+4 5
+4 8
+8 11
+3 1 2 6 7 4 9 10 5 8 12 11
+res : 1
+
+12
+3 1
+3 2
+1 6
+1 7
+6 9
+6 10
+10 12
+2 4
+4 5
+4 8
+8 11
+3 2 1 7 6 4 9 10 5 8 12 11
+res : 0
+
+14
+1 2
+1 4
+1 11
+2 3
+3 5
+3 13
+4 6
+4 8
+6 7
+8 9
+8 10
+11 12
+11 14
+1 11 2 4 12 14 3 6 8 5 13 7 10 9
+res : 1
+
+14
+1 2
+1 4
+1 11
+2 3
+3 5
+3 13
+4 6
+4 8
+6 7
+8 9
+8 10
+11 12
+11 14
+1 11 2 4 12 14 3 6 8 5 13 7 9 10
+res : 1
 """
