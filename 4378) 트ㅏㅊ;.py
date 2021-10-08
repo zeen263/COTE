@@ -59,13 +59,6 @@ typo['/'] = '.'
 typo[' '] = ' '
 typo['\n'] = ''
 
-'''
-lines = sys.stdin.readlines()  # 이렇게 하면 데이터를 다 읽고 결과를 퉤퉤 한번에 뱉어내나봐
-for line in lines:
-    for ch in line.strip():
-        print(typo[ch], end='')
-    print()
-'''
 
 while True:
     try:
@@ -74,3 +67,13 @@ while True:
         print()
     except:
         break
+
+
+'''
+# 출력 형식이 잘못되었습니다
+lines = sys.stdin.readlines()  # 이렇게 하면 데이터를 다 읽고 결과를 퉤퉤 한번에 뱉어내나봐
+for line in lines:
+    for ch in line.strip():
+        print(typo[ch], end='')
+    print()
+'''
