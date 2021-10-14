@@ -2,7 +2,7 @@ import heapq
 
 
 class Solution:
-    def allCellsDistOrder(self, rows: int, cols: int, rCenter: int, cCenter: int) -> List[List[int]]:
+    def allCellsDistOrder(self, rows: int, cols: int, rCenter: int, cCenter: int):
         res = []
         dist = [[x, y] for x in range(rows) for y in range(cols)]
         heap = []
